@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -o errexit
+root=$(echo $(pwd))
+cd src/skynet && make linux
+
+cd $root
+echo "Enter 'src/3rd/luaclib'"
+cd src/3rd/luaclib && make && make push
+
+
