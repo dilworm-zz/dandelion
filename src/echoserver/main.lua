@@ -11,10 +11,13 @@ skynet.start(function()
     end
 
     for _, agent in pairs(agents) do
-        skynet.fork(function()
-            for i=1,100 do
-                skynet.send(agent, "lua", "testuuid")
-            end
-        end)
+        for i=1,10000 do
+           -- skynet.send(agent, "lua", "testuuid1")
+        end
     end
+
+    for _, agent in pairs(agents) do
+        skynet.send(agent, "lua", "testuuid2")
+    end
+
 end)

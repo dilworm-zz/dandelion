@@ -29,7 +29,7 @@ function CMD.get()
     end
     ret = ret + next_seq
     next_seq = next_seq + 1
-    skynet.error(string.format("new uuid %s", ret))
+    --skynet.error(string.format("new uuid %s", ret))
 
     return ret
 end
