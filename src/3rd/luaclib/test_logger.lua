@@ -11,7 +11,7 @@ assert(logger)
 ]]
 
 logger.set_level(0)
-logger.init("test.log", 100, 3)
+logger.init("log/test.log", 100, 0)
 
 for i=0,5 do
     logger.log(i, "hello logger!")

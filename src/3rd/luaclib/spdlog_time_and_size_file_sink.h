@@ -31,6 +31,7 @@ public:
         _rotate(msg.time, msg.formatted.size());
         _current_size += msg.formatted.size();
         _file_helper.write(msg);
+        //printf("current_size %ld\n", _current_size);
     }
 
     void flush()
@@ -62,7 +63,7 @@ private:
         time_t tt = std::chrono::system_clock::to_time_t(tp);
         tm date = spdlog::details::os::localtime(tt);
         char name[1024] = {0};
-        snprintf(name, sizeof(name), "%s.%4d%2d%2d.%d", 
+        snprintf(name, sizeof(name), "%s.%04d%02d%02d.%d", 
                  _base_filename.c_str(), 
                  date.tm_year + 1900, 
                  date.tm_mon + 1,
@@ -92,7 +93,7 @@ private:
         {
             _file_helper.close();
             std::string target = _calc_rotation_filename(now);
-            if (details::file_helper::file_exists(target) && 
+            if (details::file_helper::file_exists(_base_filename) && 
                 details::os::rename(_base_filename, target))
             {
                 throw spdlog_ex("rotating_file_sink: failed renaming " + filename_to_str(_base_filename) + " to " + filename_to_str(target), errno);

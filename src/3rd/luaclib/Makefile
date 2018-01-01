@@ -7,12 +7,14 @@ all:
 	g++ -g -pedantic -std=c++11 -pthread -Wall -fPIC --shared lua-logger.cpp -I../../3rd/spdlog/include -I$(INCLUDE_LUA) -o logger.so
 
 push:
-	#cp util.so ../../skynet/luaclib/
-	#cp dandelion-logger.so ../../skynet/luaclib/
+	cp util.so ../../skynet/luaclib/
+	cp logger.so ../../skynet/luaclib/
 
-test:
-	#lua test.lua
-	#./logger_test
+test_util:
+	lua test.lua
+
+test_logger:
+	if test ! -d log; then mkdir log; fi
 	lua test_logger.lua
 
 clean:
